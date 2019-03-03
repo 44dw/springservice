@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body}, 'clients')}">
+<body>
+<h2>Редактирование клиента</h2>
+    <form th:object="${client}" id="addForm" method="post">
+        <div th:class="${'form-group' + (!#fields.hasErrors('name') ? '' : ' has-error')}">
+            <label for="name">Имя</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}"/>
+            <span class="validationError font-italic text-danger"
+                  th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}">Name error</span>
+        </div>
+        <div th:class="${'form-group' + (!#fields.hasErrors('surname') ? '' : ' has-error')}">
+            <label for="surname">Фамилия</label>
+            <input type="text" class="form-control" id="surname" th:field="*{surname}"/>
+            <span class="validationError font-italic text-danger"
+                  th:if="${#fields.hasErrors('surname')}"
+                  th:errors="*{surname}">Surname error</span>
+        </div>
+        <div th:class="${'form-group' + (!#fields.hasErrors('telephone') ? '' : ' has-error')}">
+            <label for="telephone">Телефон</label>
+            <input type="number" class="form-control" id="telephone" th:field="*{telephone}"/>
+            <span class="validationError font-italic text-danger"
+                  th:if="${#fields.hasErrors('telephone')}"
+                  th:errors="*{telephone}">Telephone error</span>
+        </div>
+        <button type="submit" class="btn"
+                th:with="text=${client.id==0} ? 'Создать клиента' : 'Изменить клиента'">Продолжить</button>
+    </form>
+</body>
+</html>

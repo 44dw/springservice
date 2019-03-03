@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body}, 'clients')}">
+<body>
+    <br>
+    <br>
+    <div class="jumbotron">
+        <h1 class="text-danger">Ошибка!</h1>
+        <p class="text-danger">Нельзя удалить клиента, на которого есть заказы!</p>
+        <a class="btn btn-secondary" th:href="@{/clients/}">Назад</a>
+    </div>
+</body>
+</html>

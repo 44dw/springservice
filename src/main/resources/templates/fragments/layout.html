@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout (template, name)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+</head>
+<body>
+
+    <nav class="navbar navbar-light navbar-expand-lg bg-light">
+        <div class="navbar-brand">SPRING-carservice</div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav">
+                <li class="nav-item" th:class="${name=='orders' ? 'active' : ''}"><a class="nav-link" th:href="@{/orders/}">Заказы</a></li>
+                <li class="nav-item" th:class="${name=='clients' ? 'active' : ''}"><a class="nav-link" th:href="@{/clients/}">Клиенты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <th:block th:include="${template}"/>
+    </div>
+
+    <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
+    <script th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
+    <script th:src="@{/js/enabledButton.js}"></script>
+    <script th:src="@{/js/goToUpdatePage.js}"></script>
+    <script th:src="@{/js/processDelete.js}"></script>
+    <script th:src="@{/js/filterTable.js}"></script>
+
+</body>
+</html>

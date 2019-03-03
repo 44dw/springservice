@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="tableButtonBlock (tableName)">
+        <div class="container">
+            <a class="btn" id="initAddRow" th:href="@{__${'/' + tableName + '/new'}__}">Добавить</a>
+            <a class="btn disabled" id="initUpdateRow" th:onclick="'goToUpdatePage();'">Изменить</a>
+            <a class="btn disabled" id="initDeleteRow" data-toggle="modal" data-target="#delModal">Удалить</a>
+        </div>
+
+        <div class="modal fade" id="delModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Подтвердите действие</h4>
+                    </div>
+                    <div class="modal-body">Вы действительно хотите удалить запись?</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" th:onclick="'processDelete();'">Продолжить</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Отмена</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

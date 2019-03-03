@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body}, 'orders')}">
+<body>
+    <h2>Редактирование заказа</h2>
+    <form th:object="${order}" id="addForm" method="post">
+        <div th:class="${'form-group' + (!#fields.hasErrors('description') ? '' : ' has-error')}">
+            <label for="description">Описание</label>
+            <textarea class="form-control" id="description" rows="5" th:field="*{description}"></textarea>
+            <span class="validationError font-italic text-danger"
+                  th:if="${#fields.hasErrors('description')}"
+                  th:errors="*{description}">Description error</span>
+        </div>
+        <div th:class="${'form-group' + (!#fields.hasErrors('createDate') ? '' : ' has-error')}">
+            <label for="createDate">Дата создания</label>
+            <input type="date" class="form-control" id="createDate" th:field="*{createDate}" th:readonly="*{createDate != null}"/>
+            <span class="validationError font-italic text-danger"
+                  th:if="${#fields.hasErrors('createDate')}"
+                  th:errors="*{createDate}">CreateDate error</span>
+        </div>
+        <div th:class="${'form-group' + (!#fields.hasErrors('finishDate') ? '' : ' has-error')}">
+            <label for="finishDate">Дата сдачи</label>
+            <input type="date" class="form-control" id="finishDate" th:field="*{finishDate}"/>
+            <span class="validationError font-italic text-danger"
+                  th:if="${#fields.hasErrors('finishDate')}"
+                  th:errors="*{finishDate}">FinishDate error</span>
+        </div>
+        <div class="form-group">
+            <label for="cost">Стоимость</label>
+            <input type="number" class="form-control" id="cost" th:field="*{cost}"/>
+        </div>
+        <div class="form-group">
+            <label for="status">Статус</label>
+            <select class="form-control" id="status" th:field="*{status}">
+                <option th:value="${T(com.a44dw.springservice.model.OrderStatus).SHEDULED}"
+                        th:text="${T(com.a44dw.springservice.model.OrderStatus).SHEDULED.getVal()}"></option>
+                <option th:value="${T(com.a44dw.springservice.model.OrderStatus).DONE}"
+                        th:text="${T(com.a44dw.springservice.model.OrderStatus).DONE.getVal()}"></option>
+                <option th:value="${T(com.a44dw.springservice.model.OrderStatus).ACCEPTED}"
+                        th:text="${T(com.a44dw.springservice.model.OrderStatus).ACCEPTED.getVal()}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="client">Клиент</label>
+            <select class="form-control" id="client" th:field="*{client}" th:readonly="*{client != null}">
+                <option th:each="client : ${clients}"
+                        th:value="${{client}}"
+                        th:text="${client.name + ' ' + client.surname}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn"
+                th:with="text=${order.id==0} ? 'Создать заказ' : 'Изменить заказ'">Продолжить</button>
+    </form>
+
+</body>
+</html>
